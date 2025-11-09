@@ -1,16 +1,19 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r134/three.min.js"></script>
-
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Mahira MUN - Model United Nations Conference</title>
+    
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r134/three.min.js"></script>
+    
     <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Raleway:wght@300;400;500;600&display=swap" rel="stylesheet">
+    
     <link rel="stylesheet" href="styles.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
 <body>
+
     <div id="splash-screen" class="splash-screen active">
         <div class="curtain" id="curtain"></div>
         <div class="splash-logo" id="splash-logo">
@@ -21,10 +24,7 @@
     </div>
 
     <div id="main-content" class="main-content">
-        <!-- Placeholder for high-quality starry night background image -->
-       
         
-        <!-- Starfield animation (optional - can be removed if using high-quality image) -->
         <div id="starfield" class="starfield"></div>
         
         <nav class="navbar" id="navbar">
@@ -56,17 +56,15 @@
                 </div>
             </div>
         </nav>
-       
+        
         <section class="hero" id="home">
             <div id="globeContainer" class="globe-container"></div>
-            <div id="globeContainer" class="globe-container"></div>
-            <div id="globeContainer" class="globe-container"></div>
-            <div id="globeContainer" class="globe-container"></div>
+            
             <script>
               (function () {
                 const container = document.getElementById('globeContainer');
                 if (!container) return;
-            
+                
                 // Scene
                 const scene = new THREE.Scene();
                 const camera = new THREE.PerspectiveCamera(45, container.clientWidth / container.clientHeight, 0.1, 1000);
@@ -74,20 +72,20 @@
                 renderer.setSize(container.clientWidth, container.clientHeight);
                 renderer.setPixelRatio(window.devicePixelRatio);
                 container.appendChild(renderer.domElement);
-            
+                
                 // Resize
                 window.addEventListener('resize', () => {
                   camera.aspect = container.clientWidth / container.clientHeight;
                   camera.updateProjectionMatrix();
                   renderer.setSize(container.clientWidth, container.clientHeight);
                 });
-            
+                
                 // Glowing cyan-green light
                 scene.add(new THREE.AmbientLight(0x00ffcc, 0.7));
                 const light = new THREE.PointLight(0x00ffcc, 2.8, 120);
                 light.position.set(10, 10, 10);
                 scene.add(light);
-            
+                
                 // Geodesic sphere (triangular mesh)
                 const radius = 3.0;
                 const detail = 4; // Higher = more triangles
@@ -105,23 +103,23 @@
                 
                 scene.add(wireframe);
                 camera.position.z = 11;
-            
+                
                 // Animation
                 let time = 0;
                 const animate = () => {
                   requestAnimationFrame(animate);
                   time += 0.008; // **Faster spin** (was 0.002)
-            
+                  
                   // Spin in **all 3 directions** (X, Y, Z)
                   wireframe.rotation.x = time * 0.25;
                   wireframe.rotation.y = time * 0.35;
                   wireframe.rotation.z = time * 0.15;
-            
+                  
                   // **Zoom in/out (breathing)**
                   const breathe = 0.8 * Math.sin(time * 1.2);
                   camera.position.z = 11 + breathe;
                   camera.lookAt(0, 0, 0);
-            
+                  
                   renderer.render(scene, camera);
                 };
                 animate();
@@ -135,7 +133,7 @@
                 
                 <div class="countdown-container animate-fade-in-delay-2">
                     <h1 class="countdown-title">Conference Begins In</h1>
-              
+                    
                     <div class="countdown" id="countdown">
                         <div class="countdown-item">
                             <span class="countdown-value" id="days">00</span>
@@ -158,15 +156,12 @@
 
                 <a href="#committees" class="hero-cta">Explore Committees</a>
             </div>
-            <br>
-            <br>
 
             <div class="scroll-indicator">
                 <div class="scroll-arrow"></div>
             </div>
         </section>
 
-        <!-- Letter section moved before committees -->
         <section class="parchment-section">
             <div class="container">
                 <div class="parchment-card">
@@ -203,7 +198,7 @@
                                     We urge you to come prepared with thorough research, an open mind, and a passion for diplomacy. Engage respectfully with delegates from across the nation, embrace diverse perspectives, and remember that we are all working towards solutions that benefit humanity.</p>
                                     
                                     <p><strong>Welcome to Mahira MUN</strong><br/>
-                                    We look forward to meeting you and witnessing your brilliance unfold. Let us create history together. Welcome to where diplomacy meets excellence!</p>
+                                    We look forward to meeting you and witnessing your brilliance unfold. Let us make history together. Welcome to where diplomacy meets excellence!</p>
                                     
                                     <p style="margin-top: 20px; font-style: italic; color: rgba(0, 217, 102, 0.7);">The Secretariat Team, Mahira MUN Edition I</p>
                                 </div>
@@ -221,64 +216,66 @@
             </div>
         </section>
 
+        <!-- ===============================================
+             NEW "ORBIT" COMMITTEES SECTION
+        =============================================== -->
         <section class="committees-section" id="committees">
             <div class="container">
                 <h2 class="section-title">Our Committees</h2>
                 <p class="section-subtitle">Explore the diverse committees of Mahira MUN</p>
-               
-                <!-- Changed from staggered grid to hexagon layout -->
-                <div class="committees-hexagon">
-                    <a href="disec.html" class="committee-hexagon-card" style="--logo-url: url('https://hebbkx1anhila5yf.public.blob.vercel-storage.com/disec-INmMQ5QWCR6gvqeKQoIYRlXli2bbNZ.png');">
-                        <h3 class="committee-name">DISEC</h3>
-                        <p>Disarmament and International Security Committee</p>
-                        <div class="committee-overlay">
-                            <span class="read-more-text">Read More</span>
-                        </div>
-                    </a>
-
-                    <a href="unodc.html" class="committee-hexagon-card" style="--logo-url: url('https://hebbkx1anhila5yf.public.blob.vercel-storage.com/unodc-qFUUeW0JTXvw4WPkr5bsU4Iv7DDc1Y.png');">
-                        <h3 class="committee-name">UNODC</h3>
-                        <p>United Nations Office on Drugs and Crime</p>
-                        <div class="committee-overlay">
-                            <span class="read-more-text">Read More</span>
-                        </div>
-                    </a>
-
-                    <a href="unhrc.html" class="committee-hexagon-card" style="--logo-url: url('https://hebbkx1anhila5yf.public.blob.vercel-storage.com/unhcr-IJkHmZr64XUANvNSEQKELoSubnNiHe.png');">
-                        <h3 class="committee-name">UNHCR</h3>
-                        <p>United Nations High Commissioner for Refugees</p>
-                        <div class="committee-overlay">
-                            <span class="read-more-text">Read More</span>
-                        </div>
-                    </a>
-
-                    <a href="ip.html" class="committee-hexagon-card" style="--logo-url: url('https://hebbkx1anhila5yf.public.blob.vercel-storage.com/ip-gRVIrHToiEAFUZTuMRwl8Gg2ippCro.png');">
-                        <h3 class="committee-name">International Press</h3>
-                        <p>International Press Corps</p>
-                        <div class="committee-overlay">
-                            <span class="read-more-text">Read More</span>
-                        </div>
-                    </a>
-
-                    <a href="aippm.html" class="committee-hexagon-card" style="--logo-url: url('https://hebbkx1anhila5yf.public.blob.vercel-storage.com/lok%20sabha-VwS2Fs8z7gGqu2v45DUUkf5Tq2a4kk.png');">
-                        <h3 class="committee-name">AIPPM</h3>
-                        <p>All India Political Parties Meet</p>
-                        <div class="committee-overlay">
-                            <span class="read-more-text">Read More</span>
-                        </div>
-                    </a>
-
-                    <a href="ifi.html" class="committee-hexagon-card" style="--logo-url: url('https://hebbkx1anhila5yf.public.blob.vercel-storage.com/ifi-ArEq8UUTxRyh2VUmVjpPLvM1ijxsCs.png');">
-                        <h3 class="committee-name">Indian Film Industry</h3>
-                        <p>Celebrating Indian Cinema and Culture</p>
-                        <div class="committee-overlay">
-                            <span class="read-more-text">Read More</span>
-                        </div>
-                    </a>
-                </div>
                 
+                <!-- This new layout uses CSS absolute positioning for a circular "orbit" layout -->
+                <div class="committee-orbit-container">
+                    
+                    <!-- CENTRAL LOGO -->
+                    <div class="central-logo-card">
+                        <img src="./logo.png" alt="Mahira MUN Logo" class="central-logo-image">
+                        <span class="committee-title">MAHIRA MUN</span>
+                    </div>
+
+                    <!-- Committee 1: DISEC (Top) -->
+                    <a href="disec.html" class="committee-logo-card" id="disec-orbit">
+                        <img src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/disec-INmMQ5QWCR6gvqeKQoIYRlXli2bbNZ.png" alt="DISEC Logo">
+                        <span class="committee-title">DISEC</span>
+                    </a>
+                    
+                    <!-- Committee 2: IP (Top-Left) -->
+                    <a href="ip.html" class="committee-logo-card" id="ip-orbit">
+                        <img src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/ip-gRVIrHToiEAFUZTuMRwl8Gg2ippCro.png" alt="International Press Logo">
+                        <span class="committee-title">International Press</span>
+                    </a>
+
+                    <!-- Committee 3: UNHCR (Top-Right) -->
+                    <a href="unhrc.html" class="committee-logo-card" id="unhrc-orbit">
+                        <img src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/unhcr-IJkHmZr64XUANvNSEQKELoSubnNiHe.png" alt="UNHCR Logo">
+                        <span class="committee-title">UNHCR</span>
+                    </a>
+
+                    <!-- Committee 4: AIPPM (Bottom-Left) -->
+                    <a href="aippm.html" class="committee-logo-card" id="aippm-orbit">
+                        <img src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/lok%20sabha-VwS2Fs8z7gGqu2v45DUUkf5Tq2a4kk.png" alt="AIPPM Logo">
+                        <span class="committee-title">AIPPM</span>
+                    </a>
+
+                    <!-- Committee 5: UNODC (Bottom-Right) -->
+                    <a href="unodc.html" class="committee-logo-card" id="unodc-orbit">
+                        <img src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/unodc-qFUUeW0JTXvw4WPkr5bsU4Iv7DDc1Y.png" alt="UNODC Logo">
+                        <span class="committee-title">UNODC</span>
+                    </a>
+                    
+                    <!-- Committee 6: IFI (Bottom) -->
+                    <a href="ifi.html" class="committee-logo-card" id="ifi-orbit">
+                        <img src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/ifi-ArEq8UUTxRyh2VUmVjpPLvM1ijxsCs.png" alt="Indian Film Industry Logo">
+                        <span class="committee-title">Indian Film Industry</span>
+                    </a>
+
+                </div>
             </div>
         </section>
+        <!-- ===============================================
+             END OF NEW SECTION
+        =============================================== -->
+
 
         <section class="about-section">
             <div class="container">
@@ -302,7 +299,6 @@
             </div>
         </section>
 
-        <!-- Itinerary section with improved colors, center alignment, and visual enhancements -->
         <section class="itinerary-section" id="itinerary">
             <div class="container">
                 <h2 class="section-title">Conference Itinerary</h2>
@@ -311,20 +307,19 @@
                 <div class="itinerary-tabs">
                     <button class="itinerary-tab-btn active" onclick="switchItineraryDay(1)">
                         <span class="tab-day">Day 1</span>
-                        <span class="tab-date">January 24</span>
+                        <span class="tab-date">January 23</span>
                     </button>
                     <button class="itinerary-tab-btn" onclick="switchItineraryDay(2)">
                         <span class="tab-day">Day 2</span>
-                        <span class="tab-date">January 25</span>
+                        <span class="tab-date">January 24</span>
                     </button>
                     <button class="itinerary-tab-btn" onclick="switchItineraryDay(3)">
                         <span class="tab-day">Day 3</span>
-                        <span class="tab-date">January 26</span>
+                        <span class="tab-date">January 25</span>
                     </button>
                 </div>
 
                 <div class="itinerary-content">
-                    <!-- Day 1 -->
                     <div class="day-schedule active" id="schedule-1">
                         <div class="schedule-item">
                             <div class="schedule-time">09:00 AM - 10:00 AM</div>
@@ -333,7 +328,6 @@
                                 <p>Delegate check-in and credential verification</p>
                             </div>
                         </div>
-
                         <div class="schedule-item">
                             <div class="schedule-time">10:00 AM - 11:00 AM</div>
                             <div class="schedule-event">
@@ -341,7 +335,6 @@
                                 <p>Welcome address and inaugural session</p>
                             </div>
                         </div>
-
                         <div class="schedule-item">
                             <div class="schedule-time">11:30 AM - 11:45 AM</div>
                             <div class="schedule-event">
@@ -349,7 +342,6 @@
                                 <p>Refreshment break</p>
                             </div>
                         </div>
-
                         <div class="schedule-item">
                             <div class="schedule-time">11:45 AM - 02:00 PM</div>
                             <div class="schedule-event">
@@ -357,7 +349,6 @@
                                 <p>First committee debate session</p>
                             </div>
                         </div>
-
                         <div class="schedule-item">
                             <div class="schedule-time">02:00 PM - 02:50 PM</div>
                             <div class="schedule-event">
@@ -365,7 +356,6 @@
                                 <p>Networking and lunch</p>
                             </div>
                         </div>
-
                         <div class="schedule-item">
                             <div class="schedule-time">02:50 PM - 04:30 PM</div>
                             <div class="schedule-event">
@@ -375,7 +365,6 @@
                         </div>
                     </div>
 
-                    <!-- Day 2 -->
                     <div class="day-schedule" id="schedule-2">
                         <div class="schedule-item">
                             <div class="schedule-time">09:30 AM - 11:30 AM</div>
@@ -384,7 +373,6 @@
                                 <p>Third committee debate session</p>
                             </div>
                         </div>
-
                         <div class="schedule-item">
                             <div class="schedule-time">11:30 AM - 11:45 AM</div>
                             <div class="schedule-event">
@@ -392,7 +380,6 @@
                                 <p>Refreshment break</p>
                             </div>
                         </div>
-
                         <div class="schedule-item">
                             <div class="schedule-time">11:45 AM - 02:00 PM</div>
                             <div class="schedule-event">
@@ -400,7 +387,6 @@
                                 <p>Fourth committee debate session</p>
                             </div>
                         </div>
-
                         <div class="schedule-item">
                             <div class="schedule-time">02:00 PM - 02:50 PM</div>
                             <div class="schedule-event">
@@ -408,7 +394,6 @@
                                 <p>Networking and lunch</p>
                             </div>
                         </div>
-
                         <div class="schedule-item">
                             <div class="schedule-time">02:50 PM - 05:45 PM</div>
                             <div class="schedule-event">
@@ -418,7 +403,6 @@
                         </div>
                     </div>
 
-                    <!-- Day 3 -->
                     <div class="day-schedule" id="schedule-3">
                         <div class="schedule-item">
                             <div class="schedule-time">09:30 AM - 11:30 AM</div>
@@ -427,7 +411,6 @@
                                 <p>Sixth committee debate session</p>
                             </div>
                         </div>
-
                         <div class="schedule-item">
                             <div class="schedule-time">11:30 AM - 11:45 AM</div>
                             <div class="schedule-event">
@@ -435,7 +418,6 @@
                                 <p>Refreshment break</p>
                             </div>
                         </div>
-
                         <div class="schedule-item">
                             <div class="schedule-time">11:45 AM - 02:00 PM</div>
                             <div class="schedule-event">
@@ -443,7 +425,6 @@
                                 <p>Seventh committee debate session</p>
                             </div>
                         </div>
-
                         <div class="schedule-item">
                             <div class="schedule-time">02:00 PM - 02:50 PM</div>
                             <div class="schedule-event">
@@ -451,7 +432,6 @@
                                 <p>Networking and lunch</p>
                             </div>
                         </div>
-
                         <div class="schedule-item">
                             <div class="schedule-time">02:50 PM - 03:30 PM</div>
                             <div class="schedule-event">
@@ -459,7 +439,6 @@
                                 <p>Final committee debate session</p>
                             </div>
                         </div>
-
                         <div class="schedule-item">
                             <div class="schedule-time">03:45 PM - 04:30 PM</div>
                             <div class="schedule-event">
@@ -554,7 +533,7 @@
                     </div>
                 </div>
                 <div class="footer-bottom">
-                    <p>&copy; 2025 Mahira Model United Nations. All rights reserved.</p>
+                    <p>© 2025 Mahira Model United Nations. All rights reserved.</p>
                 </div>
             </div>
         </footer>
@@ -562,7 +541,7 @@
 
     <div id="resourceModal" class="modal">
         <div class="modal-content">
-            <span class="close" onclick="closeModal()">&times;</span>
+            <span class="close" onclick="closeModal()">×</span>
             <div id="modalBody"></div>
         </div>
     </div>
