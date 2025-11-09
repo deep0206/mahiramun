@@ -1,0 +1,127 @@
+<!-- Removed entire form - kept only download button as requested -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Liability Form - Mahira MUN</title>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Raleway:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <!-- Placeholder for high-quality starry night background image -->
+    <div id="starfield-bg" class="starfield-bg-placeholder" style="background-image: url('INSERT_YOUR_STARRY_NIGHT_IMAGE_HERE.jpg');"></div>
+    <div id="starfield" class="starfield"></div>
+
+    <nav class="navbar" id="navbar">
+        <div class="nav-container">
+            <div class="nav-logo">
+                <a href="index.html" class="logo-link">
+                    <img src="./logo.png" alt="logo">
+                    <span class="logo-text">MAHIRA MUN</span>
+                </a>
+            </div>
+            <ul class="nav-menu" id="nav-menu">
+                <li class="nav-item"><a href="index.html#home" class="nav-link">Home</a></li>
+                <li class="nav-item"><a href="index.html#committees" class="nav-link">Committees</a></li>
+                <li class="nav-item dropdown">
+                    <a href="#" class="nav-link dropdown-toggle">Resources <i class="fas fa-chevron-down"></i></a>
+                    <ul class="dropdown-menu">
+                        <li><a href="#" class="dropdown-link" onclick="openModal('portfolio')">Portfolio Matrix</a></li>
+                        <li><a href="#" class="dropdown-link" onclick="openModal('background')">Background Guides</a></li>
+                        <li><a href="liability-form.html" class="dropdown-link">Liability Form</a></li>
+                    </ul>
+                </li>
+                <li class="nav-item"><a href="index.html#venue" class="nav-link">Venue</a></li>
+                <li class="nav-item"><a href="index.html#contact" class="nav-link">Contact</a></li>
+            </ul>
+            <div class="hamburger" id="hamburger">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+    </nav>
+
+    <section class="form-hero">
+        <div class="hero-overlay"></div>
+        <div class="hero-content">
+            <h1 class="hero-title">Liability Form</h1>
+            <p class="hero-subtitle">Download the liability form before attending the conference</p>
+        </div>
+    </section>
+
+    <div class="form-container">
+        <div class="container">
+            <div class="form-wrapper" style="text-align: center; padding: var(--space-80) 0;">
+                <h2 class="section-title" style="margin-bottom: var(--space-40);">Liability Form</h2>
+                <p style="color: var(--color-secondary-text); margin-bottom: var(--space-40); font-size: var(--fs-lg);">Please download and complete the liability form before attending Mahira MUN</p>
+                <button class="download-btn" onclick="downloadLiabilityForm()" style="font-size: var(--fs-lg); padding: var(--space-20) var(--space-40);">
+                    <i class="fas fa-download"></i> Download Liability Form (PDF)
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-logo">
+                    <h3>MAHIRA MUN</h3>
+                    <p>Empowering Future Leaders</p>
+                </div>
+                <div class="footer-links">
+                    <a href="index.html#home">Home</a>
+                    <a href="index.html#committees">Committees</a>
+                    <a href="index.html#venue">Venue</a>
+                    <a href="index.html#contact">Contact</a>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2025 Mahira Model United Nations. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        function downloadLiabilityForm() {
+            const element = document.createElement('div');
+            element.innerHTML = `
+                <div style="padding: 40px; font-family: Arial, sans-serif;">
+                    <h1 style="text-align: center; color: #00d966; margin-bottom: 30px;">MAHIRA MUN</h1>
+                    <h2 style="text-align: center; margin-bottom: 40px;">Liability Waiver Form</h2>
+                    
+                    <div style="margin: 30px 0; line-height: 1.8;">
+                        <p><strong>Participant Name:</strong> _________________________________</p>
+                        <p><strong>School/Organization:</strong> _________________________________</p>
+                        <p><strong>Contact Number:</strong> _________________________________</p>
+                        <p><strong>Email:</strong> _________________________________</p>
+                    </div>
+
+                    <div style="margin: 40px 0; line-height: 1.8; border-top: 2px solid #00d966; padding-top: 20px;">
+                        <h3>Liability Waiver</h3>
+                        <p>I, the undersigned, hereby acknowledge and accept the liability waiver for Mahira Model United Nations. I understand that I will adhere to all rules and regulations set forth by the organizing committee. I assume full responsibility for any injuries or damages that may occur during my participation.</p>
+                    </div>
+
+                    <div style="margin: 30px 0;">
+                        <p><strong>Signature:</strong> _________________________________ <strong>Date:</strong> _____________</p>
+                        <p><strong>Guardian Signature (if under 18):</strong> _________________________________ <strong>Date:</strong> _____________</p>
+                    </div>
+                </div>
+            `;
+            
+            const opt = {
+                margin: 15,
+                filename: 'mahira-mun-liability-form.pdf',
+                image: { type: 'jpeg', quality: 0.98 },
+                html2canvas: { scale: 2 },
+                jsPDF: { orientation: 'portrait', unit: 'mm', format: 'a4' }
+            };
+            html2pdf().set(opt).from(element).save();
+        }
+    </script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
+    <script src="script.js"></script>
+</body>
+</html>

@@ -1,0 +1,572 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r134/three.min.js"></script>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mahira MUN - Model United Nations Conference</title>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Raleway:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <div id="splash-screen" class="splash-screen active">
+        <div class="curtain" id="curtain"></div>
+        <div class="splash-logo" id="splash-logo">
+            <img src="./logo.png" alt="logo">
+            <h1 class="splash-title">MAHIRA MUN</h1>
+            <p class="splash-subtitle">Edition I</p>
+        </div>
+    </div>
+
+    <div id="main-content" class="main-content">
+        <!-- Placeholder for high-quality starry night background image -->
+       
+        
+        <!-- Starfield animation (optional - can be removed if using high-quality image) -->
+        <div id="starfield" class="starfield"></div>
+        
+        <nav class="navbar" id="navbar">
+            <div class="nav-container">
+                <div class="nav-logo">
+                    <a href="index.html" class="logo-link">
+                        <img src="./logo.png" alt="logo">
+                        <span class="logo-text">MAHIRA MUN</span>
+                    </a>
+                </div>
+                <ul class="nav-menu" id="nav-menu">
+                    <li class="nav-item"><a href="#home" class="nav-link">Home</a></li>
+                    <li class="nav-item"><a href="#committees" class="nav-link">Committees</a></li>
+                    <li class="nav-item dropdown">
+                        <a href="#" class="nav-link dropdown-toggle">Resources <i class="fas fa-chevron-down"></i></a>
+                        <ul class="dropdown-menu">
+                            <li><a href="#" class="dropdown-link" onclick="openModal('portfolio')">Portfolio Matrix</a></li>
+                            <li><a href="#" class="dropdown-link" onclick="openModal('background')">Background Guides</a></li>
+                            <li><a href="liability-form.html" class="dropdown-link">Liability Form</a></li>
+                        </ul>
+                    </li>
+                    <li class="nav-item"><a href="#venue" class="nav-link">Venue</a></li>
+                    <li class="nav-item"><a href="#contact" class="nav-link">Contact</a></li>
+                </ul>
+                <div class="hamburger" id="hamburger">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </div>
+            </div>
+        </nav>
+       
+        <section class="hero" id="home">
+            <div id="globeContainer" class="globe-container"></div>
+            <div id="globeContainer" class="globe-container"></div>
+            <div id="globeContainer" class="globe-container"></div>
+            <div id="globeContainer" class="globe-container"></div>
+            <script>
+              (function () {
+                const container = document.getElementById('globeContainer');
+                if (!container) return;
+            
+                // Scene
+                const scene = new THREE.Scene();
+                const camera = new THREE.PerspectiveCamera(45, container.clientWidth / container.clientHeight, 0.1, 1000);
+                const renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
+                renderer.setSize(container.clientWidth, container.clientHeight);
+                renderer.setPixelRatio(window.devicePixelRatio);
+                container.appendChild(renderer.domElement);
+            
+                // Resize
+                window.addEventListener('resize', () => {
+                  camera.aspect = container.clientWidth / container.clientHeight;
+                  camera.updateProjectionMatrix();
+                  renderer.setSize(container.clientWidth, container.clientHeight);
+                });
+            
+                // Glowing cyan-green light
+                scene.add(new THREE.AmbientLight(0x00ffcc, 0.7));
+                const light = new THREE.PointLight(0x00ffcc, 2.8, 120);
+                light.position.set(10, 10, 10);
+                scene.add(light);
+            
+                // Geodesic sphere (triangular mesh)
+                const radius = 3.0;
+                const detail = 4; // Higher = more triangles
+                const geometry = new THREE.IcosahedronGeometry(radius, detail);
+                
+                // Convert to wireframe with glowing edges
+                const edges = new THREE.EdgesGeometry(geometry);
+                const lineMat = new THREE.LineBasicMaterial({
+                  color: 0x00ffcc,
+                  transparent: true,
+                  opacity: 10,
+                  linewidth: 1.5
+                });
+                const wireframe = new THREE.LineSegments(edges, lineMat);
+                
+                scene.add(wireframe);
+                camera.position.z = 11;
+            
+                // Animation
+                let time = 0;
+                const animate = () => {
+                  requestAnimationFrame(animate);
+                  time += 0.008; // **Faster spin** (was 0.002)
+            
+                  // Spin in **all 3 directions** (X, Y, Z)
+                  wireframe.rotation.x = time * 0.25;
+                  wireframe.rotation.y = time * 0.35;
+                  wireframe.rotation.z = time * 0.15;
+            
+                  // **Zoom in/out (breathing)**
+                  const breathe = 0.8 * Math.sin(time * 1.2);
+                  camera.position.z = 11 + breathe;
+                  camera.lookAt(0, 0, 0);
+            
+                  renderer.render(scene, camera);
+                };
+                animate();
+              })();
+            </script>
+
+            <div class="hero-overlay"></div>
+            <div class="hero-content">
+                <h1 class="hero-title animate-fade-in">MAHIRA MODEL UNITED NATIONS</h1>
+                <h2 class="hero-subtitle animate-fade-in-delay">Edition I - Where Diplomacy Meets Excellence</h2>
+                
+                <div class="countdown-container animate-fade-in-delay-2">
+                    <h1 class="countdown-title">Conference Begins In</h1>
+              
+                    <div class="countdown" id="countdown">
+                        <div class="countdown-item">
+                            <span class="countdown-value" id="days">00</span>
+                            <span class="countdown-label">Days</span>
+                        </div>
+                        <div class="countdown-item">
+                            <span class="countdown-value" id="hours">00</span>
+                            <span class="countdown-label">Hours</span>
+                        </div>
+                        <div class="countdown-item">
+                            <span class="countdown-value" id="minutes">00</span>
+                            <span class="countdown-label">Minutes</span>
+                        </div>
+                        <div class="countdown-item">
+                            <span class="countdown-value" id="seconds">00</span>
+                            <span class="countdown-label">Seconds</span>
+                        </div>
+                    </div>
+                </div>
+
+                <a href="#committees" class="hero-cta">Explore Committees</a>
+            </div>
+            <br>
+            <br>
+
+            <div class="scroll-indicator">
+                <div class="scroll-arrow"></div>
+            </div>
+        </section>
+
+        <!-- Letter section moved before committees -->
+        <section class="parchment-section">
+            <div class="container">
+                <div class="parchment-card">
+                    <div class="parchment-scroll-wrapper">
+                        <svg class="scroll-decoration top" viewBox="0 0 100 40" preserveAspectRatio="xMidYMid slice">
+                            <path d="M0,20 Q25,0 50,0 T100,20" fill="none" stroke="#00d966" stroke-width="0.5" opacity="0.6"/>
+                            <circle cx="50" cy="20" r="3" fill="#00d966" opacity="0.8"/>
+                            <circle cx="20" cy="20" r="2" fill="#00d966" opacity="0.4"/>
+                            <circle cx="80" cy="20" r="2" fill="#00d966" opacity="0.4"/>
+                        </svg>
+                        
+                        <div class="scroll-body expanded">
+                            <div class="scroll-content">
+                                <div class="scroll-header">
+                                    <div class="seal-badge"></div>
+                                    <h3 class="scroll-title">Letter from the Secretariat Team</h3>
+                                    <div class="seal-badge"></div>
+                                </div>
+                                
+                                <div class="scroll-text">
+                                    <p><strong>Dear Delegates,</strong></p>
+                                    <p>We are delighted to welcome you to Mahira Model United Nations Edition I. This letter serves as our heartfelt greeting and a preview of what awaits you at this extraordinary gathering of minds.</p>
+                                    
+                                    <p><strong>Our Vision</strong><br/>
+                                    Mahira MUN represents more than just a conference—it is a movement towards fostering diplomatic excellence and developing future leaders of our world. We believe that through constructive dialogue and rigorous debate, we can inspire positive change on both local and global scales.</p>
+                                    
+                                    <p><strong>What to Expect</strong><br/>
+                                    Prepare yourself for intense debates, meaningful friendships, and intellectual challenges that will push your boundaries. Our committees are designed to provide realistic simulations of international diplomacy, where your research and critical thinking will be put to the test.</p>
+                                    
+                                    <p><strong>Commitment to Excellence</strong><br/>
+                                    The Secretariat is committed to ensuring a smooth, engaging, and memorable experience for all participants. Our team has meticulously planned every detail to provide you with an unparalleled platform for learning and growth.</p>
+                                    
+                                    <p><strong>A Call to Action</strong><br/>
+                                    We urge you to come prepared with thorough research, an open mind, and a passion for diplomacy. Engage respectfully with delegates from across the nation, embrace diverse perspectives, and remember that we are all working towards solutions that benefit humanity.</p>
+                                    
+                                    <p><strong>Welcome to Mahira MUN</strong><br/>
+                                    We look forward to meeting you and witnessing your brilliance unfold. Let us create history together. Welcome to where diplomacy meets excellence!</p>
+                                    
+                                    <p style="margin-top: 20px; font-style: italic; color: rgba(0, 217, 102, 0.7);">The Secretariat Team, Mahira MUN Edition I</p>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <svg class="scroll-decoration bottom" viewBox="0 0 100 40" preserveAspectRatio="xMidYMid slice">
+                            <path d="M0,20 Q25,40 50,40 T100,20" fill="none" stroke="#00d966" stroke-width="0.5" opacity="0.6"/>
+                            <circle cx="50" cy="20" r="3" fill="#00d966" opacity="0.8"/>
+                            <circle cx="20" cy="20" r="2" fill="#00d966" opacity="0.4"/>
+                            <circle cx="80" cy="20" r="2" fill="#00d966" opacity="0.4"/>
+                        </svg>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="committees-section" id="committees">
+            <div class="container">
+                <h2 class="section-title">Our Committees</h2>
+                <p class="section-subtitle">Explore the diverse committees of Mahira MUN</p>
+               
+                <!-- Changed from staggered grid to hexagon layout -->
+                <div class="committees-hexagon">
+                    <a href="disec.html" class="committee-hexagon-card" style="--logo-url: url('https://hebbkx1anhila5yf.public.blob.vercel-storage.com/disec-INmMQ5QWCR6gvqeKQoIYRlXli2bbNZ.png');">
+                        <h3 class="committee-name">DISEC</h3>
+                        <p>Disarmament and International Security Committee</p>
+                        <div class="committee-overlay">
+                            <span class="read-more-text">Read More</span>
+                        </div>
+                    </a>
+
+                    <a href="unodc.html" class="committee-hexagon-card" style="--logo-url: url('https://hebbkx1anhila5yf.public.blob.vercel-storage.com/unodc-qFUUeW0JTXvw4WPkr5bsU4Iv7DDc1Y.png');">
+                        <h3 class="committee-name">UNODC</h3>
+                        <p>United Nations Office on Drugs and Crime</p>
+                        <div class="committee-overlay">
+                            <span class="read-more-text">Read More</span>
+                        </div>
+                    </a>
+
+                    <a href="unhrc.html" class="committee-hexagon-card" style="--logo-url: url('https://hebbkx1anhila5yf.public.blob.vercel-storage.com/unhcr-IJkHmZr64XUANvNSEQKELoSubnNiHe.png');">
+                        <h3 class="committee-name">UNHCR</h3>
+                        <p>United Nations High Commissioner for Refugees</p>
+                        <div class="committee-overlay">
+                            <span class="read-more-text">Read More</span>
+                        </div>
+                    </a>
+
+                    <a href="ip.html" class="committee-hexagon-card" style="--logo-url: url('https://hebbkx1anhila5yf.public.blob.vercel-storage.com/ip-gRVIrHToiEAFUZTuMRwl8Gg2ippCro.png');">
+                        <h3 class="committee-name">International Press</h3>
+                        <p>International Press Corps</p>
+                        <div class="committee-overlay">
+                            <span class="read-more-text">Read More</span>
+                        </div>
+                    </a>
+
+                    <a href="aippm.html" class="committee-hexagon-card" style="--logo-url: url('https://hebbkx1anhila5yf.public.blob.vercel-storage.com/lok%20sabha-VwS2Fs8z7gGqu2v45DUUkf5Tq2a4kk.png');">
+                        <h3 class="committee-name">AIPPM</h3>
+                        <p>All India Political Parties Meet</p>
+                        <div class="committee-overlay">
+                            <span class="read-more-text">Read More</span>
+                        </div>
+                    </a>
+
+                    <a href="ifi.html" class="committee-hexagon-card" style="--logo-url: url('https://hebbkx1anhila5yf.public.blob.vercel-storage.com/ifi-ArEq8UUTxRyh2VUmVjpPLvM1ijxsCs.png');">
+                        <h3 class="committee-name">Indian Film Industry</h3>
+                        <p>Celebrating Indian Cinema and Culture</p>
+                        <div class="committee-overlay">
+                            <span class="read-more-text">Read More</span>
+                        </div>
+                    </a>
+                </div>
+                
+            </div>
+        </section>
+
+        <section class="about-section">
+            <div class="container">
+                <div class="about-content">
+                    <div class="about-logo-container">
+                        <div class="about-logo">
+                            <img src="./logo.png" alt="logo">
+                            <h2 class="about-logo-text">MAHIRA MUN</h2>
+                            <div class="logo-decoration"></div>
+                        </div>
+                    </div>
+                    <div class="about-text">
+                        <h2 class="section-title">About Mahira MUN</h2>
+                        <p class="about-description">
+                            Mahira Model United Nations brings together the brightest minds to engage in diplomatic discourse, 
+                            tackle global challenges, and develop leadership skills. Our inaugural edition promises an 
+                            unparalleled experience in international relations and diplomacy.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Itinerary section with improved colors, center alignment, and visual enhancements -->
+        <section class="itinerary-section" id="itinerary">
+            <div class="container">
+                <h2 class="section-title">Conference Itinerary</h2>
+                <p class="section-subtitle">Schedule for all three days</p>
+                
+                <div class="itinerary-tabs">
+                    <button class="itinerary-tab-btn active" onclick="switchItineraryDay(1)">
+                        <span class="tab-day">Day 1</span>
+                        <span class="tab-date">January 24</span>
+                    </button>
+                    <button class="itinerary-tab-btn" onclick="switchItineraryDay(2)">
+                        <span class="tab-day">Day 2</span>
+                        <span class="tab-date">January 25</span>
+                    </button>
+                    <button class="itinerary-tab-btn" onclick="switchItineraryDay(3)">
+                        <span class="tab-day">Day 3</span>
+                        <span class="tab-date">January 26</span>
+                    </button>
+                </div>
+
+                <div class="itinerary-content">
+                    <!-- Day 1 -->
+                    <div class="day-schedule active" id="schedule-1">
+                        <div class="schedule-item">
+                            <div class="schedule-time">09:00 AM - 10:00 AM</div>
+                            <div class="schedule-event">
+                                <h4>Opening Registrations</h4>
+                                <p>Delegate check-in and credential verification</p>
+                            </div>
+                        </div>
+
+                        <div class="schedule-item">
+                            <div class="schedule-time">10:00 AM - 11:00 AM</div>
+                            <div class="schedule-event">
+                                <h4>Opening Ceremony</h4>
+                                <p>Welcome address and inaugural session</p>
+                            </div>
+                        </div>
+
+                        <div class="schedule-item">
+                            <div class="schedule-time">11:30 AM - 11:45 AM</div>
+                            <div class="schedule-event">
+                                <h4>High Tea 1</h4>
+                                <p>Refreshment break</p>
+                            </div>
+                        </div>
+
+                        <div class="schedule-item">
+                            <div class="schedule-time">11:45 AM - 02:00 PM</div>
+                            <div class="schedule-event">
+                                <h4>Committee Session I</h4>
+                                <p>First committee debate session</p>
+                            </div>
+                        </div>
+
+                        <div class="schedule-item">
+                            <div class="schedule-time">02:00 PM - 02:50 PM</div>
+                            <div class="schedule-event">
+                                <h4>Lunch Break</h4>
+                                <p>Networking and lunch</p>
+                            </div>
+                        </div>
+
+                        <div class="schedule-item">
+                            <div class="schedule-time">02:50 PM - 04:30 PM</div>
+                            <div class="schedule-event">
+                                <h4>Committee Session II</h4>
+                                <p>Second committee debate session</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Day 2 -->
+                    <div class="day-schedule" id="schedule-2">
+                        <div class="schedule-item">
+                            <div class="schedule-time">09:30 AM - 11:30 AM</div>
+                            <div class="schedule-event">
+                                <h4>Committee Session III</h4>
+                                <p>Third committee debate session</p>
+                            </div>
+                        </div>
+
+                        <div class="schedule-item">
+                            <div class="schedule-time">11:30 AM - 11:45 AM</div>
+                            <div class="schedule-event">
+                                <h4>High Tea 2</h4>
+                                <p>Refreshment break</p>
+                            </div>
+                        </div>
+
+                        <div class="schedule-item">
+                            <div class="schedule-time">11:45 AM - 02:00 PM</div>
+                            <div class="schedule-event">
+                                <h4>Committee Session IV</h4>
+                                <p>Fourth committee debate session</p>
+                            </div>
+                        </div>
+
+                        <div class="schedule-item">
+                            <div class="schedule-time">02:00 PM - 02:50 PM</div>
+                            <div class="schedule-event">
+                                <h4>Lunch Break</h4>
+                                <p>Networking and lunch</p>
+                            </div>
+                        </div>
+
+                        <div class="schedule-item">
+                            <div class="schedule-time">02:50 PM - 05:45 PM</div>
+                            <div class="schedule-event">
+                                <h4>Socials & Evening Events</h4>
+                                <p>Connect with delegates and enjoy evening activities</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Day 3 -->
+                    <div class="day-schedule" id="schedule-3">
+                        <div class="schedule-item">
+                            <div class="schedule-time">09:30 AM - 11:30 AM</div>
+                            <div class="schedule-event">
+                                <h4>Committee Session VI</h4>
+                                <p>Sixth committee debate session</p>
+                            </div>
+                        </div>
+
+                        <div class="schedule-item">
+                            <div class="schedule-time">11:30 AM - 11:45 AM</div>
+                            <div class="schedule-event">
+                                <h4>High Tea 3</h4>
+                                <p>Refreshment break</p>
+                            </div>
+                        </div>
+
+                        <div class="schedule-item">
+                            <div class="schedule-time">11:45 AM - 02:00 PM</div>
+                            <div class="schedule-event">
+                                <h4>Committee Session VII</h4>
+                                <p>Seventh committee debate session</p>
+                            </div>
+                        </div>
+
+                        <div class="schedule-item">
+                            <div class="schedule-time">02:00 PM - 02:50 PM</div>
+                            <div class="schedule-event">
+                                <h4>Lunch Break</h4>
+                                <p>Networking and lunch</p>
+                            </div>
+                        </div>
+
+                        <div class="schedule-item">
+                            <div class="schedule-time">02:50 PM - 03:30 PM</div>
+                            <div class="schedule-event">
+                                <h4>Committee Session VIII</h4>
+                                <p>Final committee debate session</p>
+                            </div>
+                        </div>
+
+                        <div class="schedule-item">
+                            <div class="schedule-time">03:45 PM - 04:30 PM</div>
+                            <div class="schedule-event">
+                                <h4>Closing Ceremony</h4>
+                                <p>Awards presentation and closing remarks</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="venue-section" id="venue">
+            <div class="container">
+                <h2 class="section-title">Conference Venue</h2>
+                
+                <div class="venue-content">
+                    <div class="venue-info">
+                        <div class="venue-details">
+                            <div class="venue-icon">
+                                <i class="fas fa-map-marker-alt"></i>
+                            </div>
+                            <div class="venue-text">
+                                <h3>Location</h3>
+                                <p>Anurag University, Hyderabad</p>
+                                <p>Ghatkesar Rd, Venkatapur</p>
+                                <p>Ghatkesar Rd, Venkatapur, Hyderabad, Majarguda, Telangana 500088</p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="venue-map">
+                        <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d30455.187038388947!2d78.6350237999851!3d17.41666377702378!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3bcb76730bf4dccf%3A0x2ca84b53416f0abd!2sAnurag%20University%2C%20Hyderabad!5e0!3m2!1sen!2sin!4v1762278508579!5m2!1sen!2sin" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="contact-section" id="contact">
+            <div class="container">
+                <h2 class="section-title">Get In Touch</h2>
+                
+                <div class="contact-grid">
+                    <div class="contact-card">
+                        <div class="contact-icon">
+                            <i class="fas fa-user-tie"></i>
+                        </div>
+                        <h3>Secretary General</h3>
+                        <p class="contact-name">[Name]</p>
+                        <p class="contact-detail"><i class="fas fa-phone"></i> [Phone Number]</p>
+                        <p class="contact-detail"><i class="fas fa-envelope"></i> [Email]</p>
+                    </div>
+
+                    <div class="contact-card">
+                        <div class="contact-icon">
+                            <i class="fas fa-handshake"></i>
+                        </div>
+                        <h3>Delegate Relations</h3>
+                        <p class="contact-name">[Name]</p>
+                        <p class="contact-detail"><i class="fas fa-phone"></i> [Phone Number]</p>
+                        <p class="contact-detail"><i class="fas fa-envelope"></i> [Email]</p>
+                    </div>
+
+                    <div class="contact-card">
+                        <div class="contact-icon">
+                            <i class="fas fa-info-circle"></i>
+                        </div>
+                        <h3>General Inquiries</h3>
+                        <p class="contact-name">Follow us on social media</p>
+                        <div class="social-links">
+                            <a href="https://www.instagram.com/mahiramunofficial/" target="_blank" class="social-link">
+                                <i class="fab fa-instagram"></i>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <footer class="footer">
+            <div class="container">
+                <div class="footer-content">
+                    <div class="footer-logo">
+                        <h3>MAHIRA MUN</h3>
+                        <p>Empowering Future Leaders</p>
+                    </div>
+                    <div class="footer-links">
+                        <a href="#home">Home</a>
+                        <a href="#committees">Committees</a>
+                        <a href="#venue">Venue</a>
+                        <a href="#contact">Contact</a>
+                    </div>
+                </div>
+                <div class="footer-bottom">
+                    <p>&copy; 2025 Mahira Model United Nations. All rights reserved.</p>
+                </div>
+            </div>
+        </footer>
+    </div>
+
+    <div id="resourceModal" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeModal()">&times;</span>
+            <div id="modalBody"></div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>

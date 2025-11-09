@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title id="committee-title">UNHCR - Mahira MUN</title>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Raleway:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <div id="starfield" class="starfield"></div>
+    
+    <nav class="navbar" id="navbar">
+        <div class="nav-container">
+            <div class="nav-logo">
+                <a href="index.html" class="logo-link">
+                    <img src="./logo.png" alt="logo">
+                    <span class="logo-text">MAHIRA MUN</span>
+                </a>
+            </div>
+            <ul class="nav-menu" id="nav-menu">
+                <li class="nav-item"><a href="index.html#home" class="nav-link">Home</a></li>
+                <li class="nav-item"><a href="index.html#committees" class="nav-link">Committees</a></li>
+                <li class="nav-item"><a href="index.html#venue" class="nav-link">Venue</a></li>
+                <li class="nav-item"><a href="index.html#contact" class="nav-link">Contact</a></li>
+            </ul>
+            <div class="hamburger" id="hamburger">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+    </nav>
+
+    <section class="committee-hero committee-page">
+        <div class="hero-overlay"></div>
+        <div class="committee-hero-content">
+            <div class="committee-icon-large" id="committee-icon-large">
+                <i class="fas fa-balance-scale"></i>
+            </div>
+            <h1 class="committee-hero-title" id="committee-hero-title">UNHCR</h1>
+            <p class="committee-hero-subtitle" id="committee-hero-subtitle">United Nations High Commissioner for Refugees</p>
+        </div>
+    </section>
+
+    <div class="committee-content-wrapper">
+        <div class="container">
+            <section class="committee-section">
+                <h2 class="section-title">Agenda</h2>
+                <div class="agenda-card">
+                    <p id="committee-agenda">Protecting human rights in conflict zones with special focus on humanitarian corridors.</p>
+                </div>
+            </section>
+
+            <section class="committee-section">
+                <div class="bg-guide-preview-section">
+                    <div class="bg-guide-preview-card">
+                        <div class="bg-preview-icon">
+                            <i class="fas fa-file-pdf"></i>
+                        </div>
+                        <h3>Background Guide</h3>
+                        <p>Download the comprehensive background guide for this committee to prepare for the conference.</p>
+                        <a href="guides/unhrc-background-guide.pdf" class="download-btn" id="download-bg">
+                            <i class="fas fa-download"></i> Download PDF
+                        </a>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Added starfield background and EB pictures section -->
+            <div id="starfield-bg" class="starfield-bg-placeholder" style="background-image: url('INSERT_YOUR_STARRY_NIGHT_IMAGE_HERE.jpg');"></div>
+
+            <!-- Changed "Executive Board Portraits" to "Executive Board" to match disec.html -->
+            <section class="committee-section eb-pictures-section">
+                <h2 class="section-title">Executive Board</h2>
+                <div class="eb-pictures-grid">
+                    <div class="eb-picture-placeholder">
+                        <i class="fas fa-image"></i>
+                        <p>EB Photo Placeholder</p>
+                    </div>
+                    <div class="eb-picture-placeholder">
+                        <i class="fas fa-image"></i>
+                        <p>EB Photo Placeholder</p>
+                    </div>
+                    <div class="eb-picture-placeholder">
+                        <i class="fas fa-image"></i>
+                        <p>EB Photo Placeholder</p>
+                    </div>
+                </div>
+            </section>
+
+            <section class="committee-section">
+                <h2 class="section-title">Message from the Executive Board</h2>
+                <div class="eb-note-card">
+                    <div class="quote-icon">
+                        <i class="fas fa-quote-left"></i>
+                    </div>
+                    <p class="eb-note-text" id="eb-note">Welcome to UNHRC! This committee will explore critical human rights issues affecting millions worldwide. We encourage you to approach debates with empathy, rigorous research, and a commitment to upholding human dignity.</p>
+                </div>
+            </section>
+        </div>
+    </div>
+
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-logo">
+                    <h3>MAHIRA MUN</h3>
+                    <p>Empowering Future Leaders</p>
+                </div>
+                <div class="footer-links">
+                    <a href="index.html#home">Home</a>
+                    <a href="index.html#committees">Committees</a>
+                    <a href="index.html#venue">Venue</a>
+                    <a href="index.html#contact">Contact</a>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2025 Mahira Model United Nations. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>
